@@ -24,15 +24,15 @@ class Firewall(object):
         connection.addListeners(self)
 
         # add switch rules here
-        connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
+        self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
 					        priority=10,
     		    			match=of.ofp_match(dl_type=0x0800, nw_proto=pkt.ipv4.ICMP_PROTOCOL)))	# ipv4: icmp
-        connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
+        self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
     		    			priority=9,
     		    			match=of.ofp_match(dl_type=0x0806)))	# arp
-        self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
-					        priority=8,
-    		    			match=of.ofp_match(dl_type=0x86dd)))	# send ipv6 back
+        # self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
+		# 			        priority=8,
+    	# 	    			match=of.ofp_match(dl_type=0x86dd)))	# send ipv6 back
         self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
 					        priority=7,
     		    			match=of.ofp_match(dl_type=0x0800)))	# send ipv4 back
