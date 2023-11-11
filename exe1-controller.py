@@ -26,8 +26,8 @@ class Firewall(object):
         # add switch rules here
 	# Accept (flood) ipv4 to ipv4 icmp packets
 	self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
-						priority=4,
-						match=of.ofp_match(dl_type=0x0800, nw_proto=pkt.ipv4.ICMP_PROTOCOL)))
+					     priority=4,
+					     match=of.ofp_match(dl_type=0x0800, nw_proto=pkt.ipv4.ICMP_PROTOCOL)))
 	# Accept (flood) any arp packets
 	self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
 					     priority=3,
