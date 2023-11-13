@@ -36,16 +36,10 @@ class Firewall(object):
         self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
 						priority=2,
 						match=of.ofp_match(dl_type=0x86dd)))
-        # self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_NONE),
-		# 			     priority=2,
-		# 			     match=of.ofp_match(dl_type=0x86dd)))
 	    # Drop (send back) ipv4 to ipv4 packets
         self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
 						priority=1,
 						match=of.ofp_match(dl_type=0x0800)))
-        # self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_NONE),
-		# 			     priority=1,
-		# 			     match=of.ofp_match(dl_type=0x0800)))
 
     def _handle_PacketIn(self, event):
         """
